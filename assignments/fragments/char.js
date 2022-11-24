@@ -9,12 +9,20 @@
  */
 
 const NFA = require('../NFA');
+const State = require('../State');
 
 /**
  * Factory function for a single character NFA.
  */
 function char(symbol) {
-  // Implement here...
+  const inState = new State()
+  const outState = new State()
+
+  outState.accepting = true
+
+  inState.addTransitionForSymbol(symbol, outState)
+
+  return new NFA(inState, outState)
 }
 
 // -----------------------------------------------------------------------------
@@ -31,7 +39,7 @@ function runTests() {
   assert.equal(a.inState.accepting, false);
   assert.equal(a.outState.accepting, true);
 
-  const transition = a.getTransitionsForSymbol('a');
+  const transitions = a.inState.getTransitionsForSymbol('a');
 
   assert.equal(transitions.size, 1);
   assert.equal(transitions.has(a.outState), true);

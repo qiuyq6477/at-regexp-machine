@@ -14,7 +14,7 @@
  * The State class represents a state in a finite automata.
  */
 class State {
-  constructor({accepting = false}) {
+  constructor(accepting = false) {
     /**
      * Whether this state accepting or not.
      */
@@ -31,16 +31,26 @@ class State {
    * Adds a transition for a symbol.
    */
   addTransitionForSymbol(symbol, state) {
-    // Implement here...
+    let states = this.transitionsMap[symbol]
+    if(!states){
+      states = new Set()
+      states.add(state)
+      this.transitionsMap[symbol] = states
+    }
+    else{
+      states.add(state)
+    }
   }
 
   /**
    * Returns a list of destination states for this symbol.
    */
   getTransitionsForSymbol(symbol) {
-    // Implement here...
+    return this.transitionsMap[symbol]
   }
 }
+
+module.exports = State;
 
 // -----------------------------------------------------------------------------
 // Test cases
@@ -50,6 +60,7 @@ class State {
 // assertions below pass.
 
 const assert = require('assert');
+const { stat } = require('fs');
 
 function runTests() {
 

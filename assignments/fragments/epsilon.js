@@ -9,15 +9,18 @@
  */
 
 const NFA = require('../NFA');
+const char = require("./char")
 
+
+const EPSILON = "ε"
 /**
  * Factory function for a single character NFA.
  */
 function epsilon(symbol) {
-  // Implement here...
+  return new char(EPSILON)
 }
 
-/ -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Test cases
 
 // Your assignment is to implement `char` factory function,
