@@ -7,9 +7,7 @@ const State = require('../State');
  */
 function char(symbol) {
   const inState = new State()
-  const outState = new State()
-
-  outState.accepting = true
+  const outState = new State(true)
 
   inState.addTransitionForSymbol(symbol, outState)
 

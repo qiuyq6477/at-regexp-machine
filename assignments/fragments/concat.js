@@ -31,14 +31,6 @@ const char = require("./char")
 const epsilon = require("./epsilon")
 
 function runTests() {
-    const e = epsilon();
-
-    assert.equal(e.inState.accepting, false);
-    assert.equal(e.outState.accepting, true);
-
-    assert.equal(e.test(Const.EPSILON), true);
-
-
     const a = char('a');
     const b = char('b');
     const c = char('c');
