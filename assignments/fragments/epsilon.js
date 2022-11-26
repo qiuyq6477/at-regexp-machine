@@ -1,23 +1,13 @@
-/**
- * Automata Theory. Building a RegExp machine.
- *
- * Assignment 3: implement Epsilon NFA fragment.
- *
- * Video lecture: https://www.youtube.com/watch?v=_AK_ldfOQB0
- *
- * by Dmitry Soshnikov <dmitry.soshnikov@gmail.com>
- */
 
 const NFA = require('../NFA');
 const char = require("./char")
+const Const = require("../Const")
 
-
-const EPSILON = "ε"
 /**
  * Factory function for a single character NFA.
  */
 function epsilon(symbol) {
-  return new char(EPSILON)
+  return new char(Const.EPSILON)
 }
 
 // -----------------------------------------------------------------------------
@@ -29,10 +19,12 @@ function epsilon(symbol) {
 const assert = require('assert');
 
 function runTests() {
-  const e = epsilon('a');
+  const e = epsilon();
 
   assert.equal(e.inState.accepting, false);
   assert.equal(e.outState.accepting, true);
+
+  assert.equal(e.test(Const.EPSILON), true);
 }
 
 if (require.main === module) {

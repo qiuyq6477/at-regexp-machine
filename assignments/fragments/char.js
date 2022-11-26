@@ -1,12 +1,3 @@
-/**
- * Automata Theory. Building a RegExp machine.
- *
- * Assignment 2: implement Single character NFA fragment.
- *
- * Video lecture: https://www.youtube.com/watch?v=_AK_ldfOQB0
- *
- * by Dmitry Soshnikov <dmitry.soshnikov@gmail.com>
- */
 
 const NFA = require('../NFA');
 const State = require('../State');
@@ -43,6 +34,9 @@ function runTests() {
 
   assert.equal(transitions.size, 1);
   assert.equal(transitions.has(a.outState), true);
+
+  assert.equal(a.test("a"), true);
+  assert.equal(a.test("abc"), false);
 }
 
 if (require.main === module) {

@@ -9,6 +9,7 @@
  */
 
 // -----------------------------------------------------------------------------
+const Const = require("./Const")
 
 /**
  * The State class represents a state in a finite automata.
@@ -46,8 +47,53 @@ class State {
    * Returns a list of destination states for this symbol.
    */
   getTransitionsForSymbol(symbol) {
-    return this.transitionsMap[symbol]
+    let list = this.transitionsMap[symbol];
+    if (list){
+      return list;
+    }
+    return new Set();
   }
+
+
+  test(str, visited = new Set()) {
+    if(visited.has(this)){
+      return false
+    }
+    visited.add(this);
+
+    if(str.length == 0){
+      if(this.accepting){
+        return true;
+      }
+
+      for(const nextState of this.getTransitionsForSymbol(Const.EPSILON)){
+        if(nextState.test("", visited)){
+          return true
+        }
+      }
+      return false;
+    }
+
+
+    let symbol = str[0];
+    let rest = str.slice(1);
+    
+    const symbolTransitions = this.getTransitionsForSymbol(symbol)
+    for(const nextState of symbolTransitions){
+      if(nextState.test(rest)){
+        return true
+      }
+    }
+
+    for(const nextState of this.getTransitionsForSymbol(Const.EPSILON)){
+      if(nextState.test(str, visited)){
+        return true
+      }
+    }
+
+    return false;
+  }
+
 }
 
 module.exports = State;
@@ -60,7 +106,6 @@ module.exports = State;
 // assertions below pass.
 
 const assert = require('assert');
-const { stat } = require('fs');
 
 function runTests() {
 
