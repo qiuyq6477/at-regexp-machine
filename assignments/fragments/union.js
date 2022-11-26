@@ -1,5 +1,6 @@
 const NFA = require('../NFA');
-const Const = require("../Const")
+const State = require('../State');
+const Const = require("../Const");
 
 
 function unionPair(first, second) {
@@ -34,9 +35,8 @@ function union(first, ...rest) {
 // and make sure all assertions below pass.
 
 const assert = require('assert');
-const char = require("./char")
+const char = require("./char");
 const epsilon = require("./epsilon");
-const State = require('../State');
 
 function runTests() {
     const a = char('a');
